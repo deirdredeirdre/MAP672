@@ -2,36 +2,130 @@
 <html>
 
 <head>
+    
+    <meta charset=utf-8 />
+    <title>MAP672 Module 2 Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    
     <meta charset=utf-8 />
     <title>MAP672 Module 2 Template</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <style>
-        /* CSS style rules go here! */
+                body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            font-family: sans-serif;
+            color: #3d3d3d;
+        }
+       
+        /* Changed the margin of the heading to push the elements off the left side of the page. */
         
+        h1 {
+    font-size: 1.6em;
+    margin-left: 25px;
+}
+
+        /* Changed the margin of the heading to push the elements off the left side of the page. */
+        
+        h2 {
+    font-size: 1.4em;
+    margin-left: 25px;
+}
+        p {
+    font-size: 1em;
+    margin: 15px 25px;
+    max-width: 800px;
+}
+     
+        a {
+    color: #3e6b93;
+    font-weight: bold;
+    text-decoration: none;
+}
+        a:hover {
+    text-decoration: underline;
+}
+        img {
+    margin-left: 25px;   
+}
+      
+        /* This is a style rule. It gives the element's width and a height properties values of 200px each, the background property a color value of #3e6b93 (a blue hue), and margin values of 25px. The result is a blue square, rendered within the DOM. */
+        
+        #box {
+    width: 200px;
+    height: 200px;
+    background: #3e6b93;
+    margin: 25px;
+}
+        /* This is a style rule. This creates three mauve circles that are inline on the page.  Using a border radius of 50% creates the circle. */
+        
+        .circle {
+    width: 100px;
+    height: 100px;
+    background: #bf6864;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 25px;
+}
+
+
     </style>
 </head>
 
 <body>
 <!-- Structured HTML goes within the body tags -->
     
-    <h1>heading 1</h1>
-    <h2>heading 2</h2>
-    <p>paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus.</p>
-    <img src="images/world.png" alt="world map">
-    <p>paragraph with link: <a href="https://en.wikipedia.org/wiki/Lorem_ipsum">Lorem ipsum</a> dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.</p>
+    <h1>The World According to Miller</h1>
+    <h2>or the dream of grey cats everywhere</h2>
+    <p>This particular god's eye view is bleak.  It reminds me of an Atari version of the world.  Small, pixelated, and poorly represented.</p>
+    
+    <!-- Image link is broken because the image is not in my local module-02 folder.  Will it pickup the image once I upload to Git?  I add this note so you know that I understand why it is broken.  It displayed when I did the lesson. -->
+    
+    <img src="images/world2.png" alt="world map">
+
+    <!-- The p tags set off the paragrah and the href creates a link to the web page. Instead of diplaying the url it displays Bacon ipsum.  There is an extra space in your lesson for the html comment tags.  It will give an error if someone is copying and pasting. -->
+    
+    <p><a href="https://baconipsum.com/">Bacon ipsum</a> Bacon ipsum dolor amet alcatra chuck flank, turducken jerky prosciutto strip steak kielbasa landjaeger rump cupim. Flank short ribs kielbasa shankle biltong leberkas chicken ground round short loin frankfurter ribeye sausage shank rump. Beef t-bone filet mignon picanha cow venison, leberkas shoulder spare ribs brisket chicken tenderloin rump prosciutto. Swine tri-tip corned beef ham pork chop. Kevin frankfurter strip steak ham hock, boudin chicken shoulder. </p>
+
     <ul>
-        <li>un-ordered list item 1</li>
-        <li>list item 2</li>
-        <li>list item 3</li>
+        <li><a href="http://leafletjs.com/">Leaflet</a> </li>
+        <li><a href="https://www.mapbox.com/">Mapbox</a></li>
+        <li><a href="https://cartodb.com/">CartoDB</a></li>
+        <li><a href="http://d3js.org/">Data-Driven Documents</a></li>
     </ul>
+    
+    <!-- This is a container. ID attribute may only be used one. Class may be used multiple time.  I was unsure what Task 6 was supposed to be as identified in the lesson. -->
+    
     <div id="box"></div>
     <div class="circle"></div>
     <div class="circle"></div>
     <div class="circle"></div>
 
     <script>
-        // JavaScript code goes here  
+        document.querySelector('h1').innerHTML = 'web mapping is sweet!';
+        
+        var box = document.getElementById('box');
+box.style.background = '#4d4a9f';
+        
+        var elements = document.getElementsByClassName('circle');
+
+for(var i=0; i <= elements.length-1;i++){
+    elements[i].style['border-radius'] = '20%';  
+}
+      // "event listener" indicates there is a wait for some user interaction before doing something.  In this case when the user clicks the box, its width effectively doubles
+        
+        box.addEventListener('click', function() {
+    this.style.width = '400px';   
+});
+        
+        var newListItem = document.createElement('li');
+newListItem.innerHTML = "list item 4";
+document.querySelector('ul').appendChild(newListItem);
+        
+        console.log("hello map");
         
     </script>
     
