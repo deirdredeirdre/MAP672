@@ -4,7 +4,7 @@
 <head>
     
     <meta charset=utf-8 />
-    <title>MAP672 Module 2 Template</title>
+    <title>MAP672 Module 2: The Cartographic Gaze</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     
@@ -13,7 +13,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <style>
-                body {
+        body {
             margin: 0;
             padding: 0;
             background: #f5f5f5;
@@ -24,53 +24,50 @@
         /* Changed the margin of the heading to push the elements off the left side of the page. */
         
         h1 {
-    font-size: 1.6em;
-    margin-left: 25px;
-}
+            font-size: 1.6em;
+            margin-left: 25px;
+        }
 
         /* Changed the margin of the heading to push the elements off the left side of the page. */
         
         h2 {
-    font-size: 1.4em;
-    margin-left: 25px;
-}
+            font-size: 1.4em;
+            margin-left: 25px;
+        }
         p {
-    font-size: 1em;
-    margin: 15px 25px;
-    max-width: 800px;
-}
-     
+            font-size: 1em;
+            margin: 15px 25px;
+            max-width: 800px;
+        }
         a {
-    color: #3e6b93;
-    font-weight: bold;
-    text-decoration: none;
-}
+            color: #3e6b93;
+            font-weight: bold;
+            text-decoration: none;
+        }
         a:hover {
-    text-decoration: underline;
-}
+            text-decoration: underline;
+        }
         img {
-    margin-left: 25px;   
-}
+            margin-left: 25px;   
+        }
       
         /* This is a style rule. It gives the element's width and a height properties values of 200px each, the background property a color value of #3e6b93 (a blue hue), and margin values of 25px. The result is a blue square, rendered within the DOM. */
-        
         #box {
-    width: 200px;
-    height: 200px;
-    background: #3e6b93;
-    margin: 25px;
-}
+            width: 200px;
+            height: 200px;
+            background: #3e6b93;
+            margin: 25px;
+        }
         /* This is a style rule. This creates three mauve circles that are inline on the page.  Using a border radius of 50% creates the circle. */
         
         .circle {
-    width: 100px;
-    height: 100px;
-    background: #bf6864;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 25px;
-}
-
+            width: 100px;
+            height: 100px;
+            background: #bf6864;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 25px;
+        }
 
     </style>
 </head>
@@ -108,22 +105,23 @@
         document.querySelector('h1').innerHTML = 'web mapping is sweet!';
         
         var box = document.getElementById('box');
-box.style.background = '#4d4a9f';
+        box.style.background = '#4d4a9f';
         
         var elements = document.getElementsByClassName('circle');
 
-for(var i=0; i <= elements.length-1;i++){
-    elements[i].style['border-radius'] = '20%';  
-}
-      // "event listener" indicates there is a wait for some user interaction before doing something.  In this case when the user clicks the box, its width effectively doubles
+        for(var i=0; i <= elements.length-1;i++){
+            elements[i].style['border-radius'] = '20%';  
+        }
+        
+        // "event listener" indicates there is a wait for some user interaction before doing something.  In this case when the user clicks the box, its width effectively doubles
         
         box.addEventListener('click', function() {
-    this.style.width = '400px';   
-});
+            this.style.width = '400px';   
+        });
         
         var newListItem = document.createElement('li');
-newListItem.innerHTML = "list item 4";
-document.querySelector('ul').appendChild(newListItem);
+        newListItem.innerHTML = "list item 4";
+        document.querySelector('ul').appendChild(newListItem);
         
         console.log("hello map");
         
