@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 03 Starter Template</title>
+    <title>Three Kentucky Cities</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -58,7 +58,7 @@
 
     <footer>
         <p>Map authored by Deirdre A. Scaggs</p>
-        <p>This is me learning Java</p>
+        <p>This is me learning JavaScript</p>
         <p>This map shows three Kentucky cities.  One of which, most people have probably never heard of.  That's where I'm from and it's amazing I turned out how I did.
         </p>
     </footer>
@@ -82,13 +82,12 @@
         });
         map.addLayer(tiles);
         
-        // BEGIN WRITING CODE FOR LAB 03 HERE
         
-        var city1Name = "Lexington";
-        var city1Lat = 37.9886892;
-        var city1Lon = -84.4777153;
-        var city1Pop = 310797;	
-        var city1Capital = false;
+        var city1Name = 'Lexington',  // note how you can declare multiple variables with a single
+            city1Lat = 38.0297,       // var statement and commas between them
+            city1Lon = -84.4947,
+            city1Pop = 308428,
+            city1Capital = false;
             
         var city2Name = "Frankfort";
         var city2Lat = 38.2008333;
@@ -108,13 +107,11 @@
         var avgPop = totalPop/3;
         console.log("The average population of these cities is:" ,avgPop);
         
-        var cities = ["Lexington", "Frankfort", "Vanceburg"];
+        var cities = [city1Name, city1Name, city1Name];  // may as well use variables here
     console.log(cities);
         
         // vanceburg was founded in 1797 lexington in 1775 frankfort in 1786
        
-        
-        // END WRITING CODE FOR LAB 03 HERE
         
         // CITY1 MARKER CODE HERE
         var city1Popup = "<b>"+city1Name+"</b><br>"
@@ -129,18 +126,19 @@
         
 //         CITY2 MARKER CODE HERE
         
-var city2Popup = "<b>"+city2Name+"</b><br>"
+        var city2Popup = "<b>"+city2Name+"</b><br>"
                        +"<b>population</b>: "+city2Pop;
        
-        if(city2Capital == true) {            city2Popup += "<br>Capital of the Commonwealth of Kentucky";   
-       }
+        if(city2Capital == true) {            
+            city2Popup += "<br>Capital of the Commonwealth of Kentucky";   
+        }
         
         L.marker([city2Lat,city2Lon]).addTo(map)
             .bindPopup(city2Popup);
         
   //      CITY3 MARKER CODE HERE
-      var city3Popup = "<b>"+city3Name+"</b><br>"
-      +"<b>population</b>: "+city3Pop;
+        var city3Popup = "<b>"+city3Name+"</b><br>"
+            +"<b>population</b>: "+city3Pop;
       
        if(city3Capital == true) {
            city3Popup += "<br>Capital of the Commonwealth of Kentucky";   
