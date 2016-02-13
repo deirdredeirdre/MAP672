@@ -100,7 +100,7 @@
            var popup = "<b>"+cities[i]+"</b><br>"
                            +"<b>population</b>: "+cityPop[i];
 
-            if(cityCap == true) {
+            if(cityCap[i] == true) {
                 
                popup += "<br>Is the capital city."; 
                
@@ -109,8 +109,6 @@
            L.marker(cityCoords[i]).addTo(map)
                .bindPopup(popup);
            
-           console.log(i); // output the current value of i
-    console.log(cities[i]); // use i to access an index of the Array
        }
         
         // end writing/editing Lab 04 code here
