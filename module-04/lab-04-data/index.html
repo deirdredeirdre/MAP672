@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 04 Starter Template</title>
+    <title>Lab 04</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -51,16 +51,16 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>40th Vacation</h1>
+        <h2>2015</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
+        <p>Map authored by Deirdre A. Scaggs</p>
+        <p>Created for Lab 4.</p>
+        <p>This map shows three of the places I went last yeara for my birthday. In Roatan I got the most amazing hand carved bat mask.  Such a strange mix of ex-pat money and island life.
         </p>
     </footer>
 
@@ -90,15 +90,15 @@
         
     ];
     
-        var cityPop = [57169, 44657, 100000]
+        var cityPop = [57169, 44657, 100000];
         
-        var cityCap = [false, false, false]
+        var cityCap = [false, false, false];
         
           
        for (var i = 0; i < cities.length; i++) {
            
-           var popup = "<b>"+cities+"</b><br>"
-                           +"<b>population</b>: "+cityPop;
+           var popup = "<b>"+cities[i]+"</b><br>"
+                           +"<b>population</b>: "+cityPop[i];
 
             if(cityCap == true) {
                 
@@ -106,7 +106,7 @@
                
             }
             
-           L.marker(cityCoords).addTo(map)
+           L.marker(cityCoords[i]).addTo(map)
                .bindPopup(popup);
            
            console.log(i); // output the current value of i
