@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lab 05</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+        }
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+        /* Additional style rules go here! */
+        
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Three Kentucky Cities</h1>
+        <h2>with population densities</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Deirdre A. Scaggs</p>
+        <p>For MAPS 672.</p>
+        <p>These are the three cities in Kentucky where I have lived.
+        </p>
+    </footer>
+
+<script>
+    
+    var options = {
+        center: [38.0489,-84.5025],
+        zoom: 8
+    }
+    
+    var map = L.map('map', options);
+    
+    var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+    });
+    map.addLayer(tiles);
+
+    // begin writing/editing Lab 05 code here
+
+    var lexArea = Number(prompt("Enter data", "Enter the area of Lexington in square miles"));
+    var louArea = Number(prompt("Enter data", "Enter the area of Louisville in square miles"));
+    var vburgArea = Number(prompt("Enter data", "Enter the area of Vanceburg in square miles"));
+   
+
+    prepareData(lexArea); 
+    prepareData(louArea);
+    prepareData(vburgArea);
+
+    function prepareData(lexArea, louArea, vburgArea) { 
+
+        var cities = ["Lexington", "Louisville", "Vanceburg"]; 
+        
+        var cityCoords = [
+            [38.0297, -84.4947], 
+            [38.2542, -85.7594],
+            [38.5928, -83.3218]
+
+        ];
+        
+        var cityPops = [308428, 612780, 1518]; 
+
+        var cityAreas = [lexArea, louArea, vburgArea]; 
+
+        mapCities(cities);
+        mapCities(cityCoords);
+        mapCities(cityPops);
+        mapCities(cityAreas);
+
+    calcPopDensity(density);
+    
+    var density = cityPops/cityAreas;
+    
+    calcPopDensity(cityPops); 
+    calcPopDensity(cityAreas);
+    calcPopDensity(units);
+    
+    }
+
+    
+            
+    
+    function mapCities(cities, cityCoords, cityPops, cityAreas) { 
+
+    var units = prompt('Units for calculating density', 'Enter "miles" or "km"');
+        
+
+        for(var i = 0; i < cities.length; i++) {
+
+        if(units === miles){
+            break;
+            }
+            else{
+                /*don't know what to do with this*/
+            }
+            
+            
+
+            /*var density =  call a function named calcPopDensity here, passing
+                             the city population, area, and units as arguments, and assign
+                             return value to the "density" variable */
+
+            var popup = "<b>"+cities[i]+"</b><br>"
+                            +"<b>density</b>: "+density.toLocaleString()+" people per sq " + units;
+            
+
+        }
+          
+        L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup); 
+
+      
+        
+        
+        }
+            
+        function calcPopDensity(density){
+            
+            
+        return density; 
+        
+            
+        }
+        
+    // function is called, passing an "argument" with it
+            
+    
+    // write a function named calcPopDensity which accepts three arguments, the  
+    // population, the area of a single city, and the units ('miles' or 'km') entered by
+    // the user above. The function should calculate the density of the city with these two 
+    // values and return the result to where the function was called.
+
+
+    // end writing/editing Lab 05 code here
+
+</script>
+    
+</body>
+
+</html>
