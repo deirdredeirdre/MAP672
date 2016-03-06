@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lab 07 Starter Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+        }
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+        /* Additional style rules go here! */
+        
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Lab 7.</h1>
+        <h2>MAPS 672</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Deirdre A. Scaggs</p>
+        <p>Using leaflet.</p>
+        <p>Working through methods and other such challenges for NMP.
+        </p>
+    </footer>
+
+    <script>
+        
+        
+    var options = {
+    center: [40,-94],
+    zoom: 4,
+    minZoom: 4,
+    maxZoom: 12
+        }
+var map = L.map('map', options);
+
+                 
+        
+    var userInput = map.on('click', function(e){
+        console.log(e.latlng);   
+   
+
+        map.setView([e.latlng.lat, e.latlng.lng], 6);
+        
+        
+        var mapCenter = L.latLng(e.latlng.lat, e.latlng.lng);
+        var redIguana = L.latLng(40.7718,-111.9124);
+        var distance = mapCenter.distanceTo(redIguana);
+        console.log(distance); 
+        
+        
+        var bounds = map.getBounds();
+        console.log(bounds);
+        
+        var bottomLeft = bounds.getSouthWest(); // returns a LatLng object
+        console.log(bottomLeft.lat, bottomLeft.lng);
+        
+        var distance = bottomLeft.distanceTo(redIguana);
+        console.log(distance);
+        
+        
+            
+         });
+        
+        
+        
+     var MapQuestOpen_OSM = L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+	type: 'map',
+	ext: 'jpg',
+	attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+	subdomains: '1234'
+     }).addTo(map); 
+        
+        /*var map = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
+    
+    var OpenStreetMap_DE = L.tileLayer('http://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map); 
+    
+    */
+        
+        
+        
+                  
+    </script>
+    
+</body>
+
+</html>
