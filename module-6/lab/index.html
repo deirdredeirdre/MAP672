@@ -127,48 +127,41 @@
         
     for(var i = 0; i < cities.length; i++) {
         
-        
+        // create shortcut variable to access properties
         var props = cities[i].properties;
+      
+        // assign string value to popup from buildPopup function
+        var popup = buildPopup(cities[i].name, props.population, props.state);
 
-        var popup = "I am a temporary string value";
-
+        // create the marker with the coords and bind popup
         L.marker(props.coordinates).addTo(map)
-        .bindPopup(popup);   
-        
-    buildPopup(cities[i].name, cities[i].properties.population, cities[i].properties.state);
-        
-        console.log(props);
+          .bindPopup(popup);   
     }    
         
      function buildPopup(name, population, state) {
+          
+          // conditional statements will assign a value
+          // to colorClass
+          if(state === "KY") {
+            
+            var colorClass = "kentucky-blue";
+                
+          } else if (state === "OH") {
         
-    console.log(name, population, state);
+            var colorClass = "buckeye-red";
+                
+                  
+          } else if (state === "PA") {
+        
+            var colorClass = "panther-yellow";
+          }
             
-            if(state === "KY") {
-        var colorClass = "kentucky-blue";
-                
-                return    "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-    "<b>Population</b>: "+population.toLocaleString()+"<div>";   
-                
-    }
-            
-            if(state === "OH") {
-        var colorClass = "buckeye-red";
-                
-                return    "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-    "<b>Population</b>: "+population.toLocaleString()+"<div>";   
-    }
-            
-            if(state === "PA") {
-        var colorClass = "panther-yellow";
-                
-                return    "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
-    "<b>Population</b>: "+population.toLocaleString()+"<div>";   
+          // return a string containing the city name and population,
+          // encoded with a unique class attribute for coloring
+          return  "<div class='"+colorClass+"'><b>"+name+"</b><br>"+
+              "<b>Population</b>: "+population.toLocaleString()+"<div>";   
     }
           
-/*struggling with assigining the value to colorClass*/
-         
-        }
         
     </script>
     
