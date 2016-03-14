@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lesson 08 Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+        }
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Map Title</h1>
+        <h2>Map Subtitle</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by YOUR NAME</p>
+        <p>Additional information about the data and map goes here.</p>
+    </footer>
+
+    <script>
+
+        var places = {
+  
+
+            
+    
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.6,
+          10.1
+        ]
+      },
+      "properties": {
+        "name": "Dinagat Islands"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "madrid",
+        "size": 150
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.09814453125,
+          40.27952566881291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "valencia",
+        "size": 120
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.07666015625,
+          39.53793974517625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#7e7e7e",
+        "marker-size": "medium",
+        "marker-symbol": "",
+        "name": "cordoba",
+        "size": 110
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -5.5810546875,
+          37.96152331396614
+        ]
+      }
+    }
+  ]
+};
+        
+                
+        var map = L.map('map', {
+        center: [40.03, -3.6], 
+        zoom: 7
+        });
+
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        subdomains: 'abcd',
+        maxZoom: 19
+        });  
+        tiles.addTo(map);
+        
+       
+        
+        
+         
+       /* var placesLeaflet = L.geoJson(places, {
+        pointToLayer : function(feature,latlng) {
+            console.log(feature)
+        return L.circle(latlng, feature.properties.size * 100);
+        }
+        }).addTo(map);
+        
+       
+        this yields an error Uncaught Error: Invalid LatLng object: (10.1, NaN)
+        
+        */
+        
+        var placesLeaflet = L.geoJson(places, {
+    pointToLayer : function(feature, latlng) {
+        console.log(feature);
+        return L.circle(latlng, 20000);
+    }
+}).addTo(map);
+        
+       
+      
+    </script>
+    
+</body>
+
+</html>
