@@ -115,27 +115,33 @@ var geoJsonLayers = {};
         
     }).addTo(map);   
         
-        map.on('click', function(e) {
-        console.log(e.latlng)                  
-        geoJsonLayers[layer].eachLayer(function(layer) {
-        var distance = e.latlng.distanceTo(layer.getLatLng())/1000; 
+    map.on('click', function(e) {
+        for(l in layerInfo) {                 
+            geoJsonLayers[l].eachLayer(function(layer) {
+                var distance = e.latlng.distanceTo(layer.getLatLng())/1000; 
 
-        if(distance > 500) {
-            layer.setStyle({
-                stroke: false,
-                fill: false
-            });  
-        } else {
-            layer.setStyle({
-                stroke: true,
-                fill: true  
-            });  
-            
-              layer.bindPopup(/**feature.properties.fuel_source + '<br>'+feature.properties.plant_name[layerInfo[layer].source] + ' MW'+**/"I am <b>"+distance.toLocaleString()+ 
-                            "km</b><br> from the click point.");
-        } 
+                if(distance > 500) {
+                    layer.setStyle({
+                        stroke: false,
+                        fill: false
+                    });  
+                } else {
+                    layer.setStyle({
+                        stroke: true,
+                        fill: true  
+                    });  
+
+                    var plantName = layer.feature.properties.plant_name;
+                    var plantSource = layerInfo[l].source + ': ' + layer.feature.properties.fuel_source[layerInfo[l].source] + '<br>';
+
+                      layer.bindPopup('<b>' + plantName + '</b><br>' +
+                                      plantSource + ' MW' + 
+                                      "I am <b>"+distance.toLocaleString()+ 
+                                    "km</b><br> from the click point.");
+                }
+            });
+        }
     });
-});
         
         
 }  
