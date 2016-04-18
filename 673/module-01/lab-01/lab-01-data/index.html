@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>Lab 01 Template</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/1.0.1/simple_statistics.js"></script>
+
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+    width: 80%;
+    margin: 10px auto 10px auto;
+    background: #74a9cf;
+        }
+        
+        #map {
+    width: 80%;
+    height: 540px;
+    margin: 10px auto 10px auto;
+    background: whitesmoke;
+    border: 2px solid #dddedf;
+    
+        }
+
+        footer {
+    width: 80%;
+    margin: 10px auto 10px auto;
+    background: #bdc9e1;
+}
+        
+        .legend {
+            padding: 6px 8px;
+            font-size: lem;
+            background: rgba(255,255,255, 0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px; 
+        
+        }
+        .legend h3 {
+            font-size: 1.1em;
+            font-weight: normal; 
+            color: #001323;
+            margin: 0 0 10px 0;
+            
+        }
+        
+        .legend span {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin: 0 10px 4px 0;
+        }
+        
+        .legend label {
+            font-size: 1.1em;
+            
+        }
+        .legend label:after {
+            content: '';
+            display: block;
+            clear: both; 
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Kentucky Homeowners</h1>
+        <h2>Percent by county whom own their homes without a mortgage.</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Deirdre A. Scaggs</p>
+        <p>Lab 01, MAP 673.</p>
+        <p>
+    The basic purpose of this map is to show the percent of homeowners who have a house, free and clear of debt. The way this map is symbolized makes it seem that a great deal of homeowners in Eastern Kentucky meet this criteria. Perhaps the number appears to be high because of the lower population, perhaps fewer individuals own houses period, or perhaps it is the lower income or price of house.  There are a lot of factors here and if one did not know more about the economic/geographic history of Kentucky this data could be manipulated in many ways to support a variety of arguments.
+
+
+        </p>
+    </footer>
+
+    <script>
+        
+    var options = {
+    center: [37.8, -85.8],
+    zoom: 7.4,
+    zoomControl: false
+        }
+    
+    var map = L.map('map', options);
+        
+        map.addControl ( L.control.zoom( {position: 'topright'} ));
+        
+        $.getJSON("ky_counties_housing.json", function(data) {
+            
+            
+            var dataLayer = L.geoJson(data, {
+            
+
+        style : function(feature) {
+        return {
+                color: '#dddddd',
+                weight: 2,
+                fillOpacity: 1,
+                fillColor: '#1f78b4'
+        }
+        }
+
+         
+                
+}).addTo(map);
+           
+            //
+            
+    var info = L.control();
+
+info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+    this.update();
+    return this._div;
+};
+
+ 
+        drawMap(dataLayer);
+            
+        });
+      
+        function drawMap(dataLayer) {
+        
+        var breaks = getClassBreaks(dataLayer);
+        
+        dataLayer.eachLayer(function(layer) {
+            layer.setStyle({
+                fillColor : getColor(layer.feature.properties['OWNED_FREE']/layer.feature.properties['OWNER'],
+                         breaks)
+                
+                
+                
+            })
+            });
+            
+            drawLegend(breaks);
+         
+            
+            
+        }
+                            
+        function getClassBreaks(dataLayer) {
+            
+                        var values = [];
+            
+            dataLayer.eachLayer(function(layer) {
+           
+                values.push(layer.feature.properties['OWNED_FREE']/layer.feature.properties['OWNER'])
+            
+            });
+        
+            
+            var clusters = ss.ckmeans(values, 5);
+            
+            var breaks = clusters.map(function(cluster) {
+                
+                return [cluster[0], cluster.pop()];
+                                   
+                                    });
+            
+            return breaks; 
+            
+            }
+        
+        function getColor(d, breaks) {
+            
+            if (d <= breaks[0][1]) {
+                return '#f1eef6';
+            } else if  (d <= breaks[1][1]) {
+                return '#bdc9e1';
+            } else if  (d <= breaks[2][1]) {
+                return '#74a9cf';
+            } else if  (d <= breaks[3][1]) {
+                return '#2b8cbe';
+            } else if  (d <= breaks[4][1]) {
+                return '#045a8d'
+            }
+            
+        }
+            
+            function drawLegend(breaks) {
+            
+                var legend = L.control( { position: 'topleft'});
+                
+                legend.onAdd = function() {
+          
+                    var div = L.DomUtil.create('div', 'legend');
+                    
+                    div.innerHTML = "<h3> % Owners Without Mortgage</h3>";
+                    
+                    for(var i = 0; i < breaks.length; i++){
+                        
+                        var color = getColor(breaks[i][0], breaks);
+                        
+                        div.innerHTML +=
+                            '<span style="background:' + color + '"></span>' + '<label>'+(breaks[i][0]*100).toLocaleString() + '&mdash;' + (breaks[i][1]*100).toLocaleString() + '</label>' 
+                       
+                    
+                        
+                    }
+                    
+                    return div; 
+                    
+        };
+                
+        legend.addTo(map);
+                
+               
+                
+            }
+        
+        
+            
+
+    </script>
+    
+</body>
+
+</html>
